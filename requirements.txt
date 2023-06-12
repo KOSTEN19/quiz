@@ -1,0 +1,4 @@
+Django
+Django-admin
+psycopg2-binary
+psutil

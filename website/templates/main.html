@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<style>
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  background-color: #0a69ed;
+}
+.start-screen,
+.score-container {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+#start-button,
+#restart {
+  font-size: 1.3em;
+  padding: 0.5em 1.8em;
+  border-radius: 0.2em;
+}
+#restart {
+  margin-top: 0.9em;
+}
+#display-container {
+  background-color: #ffffff;
+  padding: 3.1em 1.8em;
+  width: 80%;
+  max-width: 37.5em;
+  margin: 0 auto;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  border-radius: 0.6em;
+}
+.header {
+  margin-bottom: 1.8em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.6em;
+  border-bottom: 0.1em solid #c0bfd2;
+}
+.timer-div {
+  background-color: #e1f5fe;
+  width: 7.5em;
+  border-radius: 1.8em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7em 1.8em;
+}
+.question {
+  margin-bottom: 1.25em;
+  font-weight: 600;
+}
+.option-div {
+  font-size: 0.9em;
+  width: 100%;
+  padding: 1em;
+  margin: 0.3em 0;
+  text-align: left;
+  outline: none;
+  background: transparent;
+  border: 1px solid #c0bfd2;
+  border-radius: 0.3em;
+}
+.option-div:disabled {
+  color: #000000;
+  cursor: not-allowed;
+}
+#next-button {
+  font-size: 1em;
+  margin-top: 1.5em;
+  background-color: #0a69ed;
+  color: #ffffff;
+  padding: 0.7em 1.8em;
+  border-radius: 0.3em;
+  float: right;
+}
+.hide {
+  display: none;
+}
+.incorrect {
+  background-color: #ffdde0;
+  color: #d32f2f;
+  border-color: #d32f2f;
+}
+.correct {
+  background-color: #e7f6d5;
+  color: #689f38;
+  border-color: #689f38;
+}
+#user-score {
+  font-size: 1.5em;
+  color: #ffffff;
+}
+</style>
+
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MCQ Quiz</title>
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="start-screen">
+      <button id="start-button">Start</button>
+    </div>
+    <div id="display-container">
+        {% if win is  None %}
+      <div class="header">
+        <div class="number-of-count">
+        
+          <span class="number-of-question">{{progres}} из 20 вопросов</span>
+        </div>
+       
+      </div>
+       {% endif %}
+        
+     <div id="container"><div class="container-mid">
+     {% if win is None %}
+     <img src="/static/{{image}}" class="rounded mx-auto d-block" style="width:50%;height:50%; margin-bottom:5%;"  alt="...">
+      <p class="question">{{question}}</p>
+    <form method="POST" action='/'>
+       {% csrf_token %}
+  
+    <button class="option-div"  name="answer" value="1">{{answer1}}</button>
+    <button class="option-div" name="answer" value="2">{{answer2}} <button>
+    <button class="option-div" name="answer" value="3" >{{answer3}}</button>
+    <button class="option-div"  name="answer" value="4">{{answer4}}</button>
+    </div>
+      <button id="next-button">Далее</button>
+    </div>
+    </form>
+    {% else %}
+
+    <h1 class="question">{{text}}</h1>
+        {% if win == 'True' %}
+        <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Ac9a9f3ae9fe06527d8fb6b77357640c02ff5dd6670e0da9aacad3dfdcf78d729&amp;source=constructor" width="500" height="400" frameborder="0"></iframe>
+        {% endif %}
+     <form method="POST" action='/restart'>
+        {% csrf_token %}
+       <button id="next-button">Заново</button>
+       </form>
+    {% endif %}
+    
+    <!-- Script -->
+    
+  </body>
+
+
+</html>
