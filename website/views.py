@@ -61,16 +61,33 @@ def main_page(request):
             print('false')
         number+=1      
         if number==20:
+            mark = ''
+            if score>18:
+                mark='A'+str(score*5)
+            elif score==17:
+                mark='B85'
+            elif score>=15:
+                mark='C'+str(score*5) 
+            elif score==14:
+                mark='D70'       
+            elif score>=12:
+                mark='E'+str(score*5)
+            else:
+                mark='F'+str(score*5)  
             print('yes 20')
             if score==20:
                 print('WIn')
+                      
+
                 context={'win': 'True',
+                'mark':mark,
                 'text': 'Вы приглашены на день рождения!!!'}
                 response = render(request, 'main.html', context)
                 return response
             else:
                 print('LOSE')
                 context={'win': 'False',
+                'mark':mark,        
                 'text': 'Вы не друг'}
                 response = render(request, 'main.html', context)
                 return response    
@@ -84,6 +101,7 @@ def main_page(request):
     print(f'score: {score} number" {number}')
     #request.session['nft_id'] = str(make)
     context = {
+
         'progres':number+1,
         'image': str(number+1)+'.jpg',
         'question':data[number][0],
