@@ -75,7 +75,7 @@ def main_page(request):
             else:
                 mark='F'+str(score*5)  
             print('yes 20')
-            if score==20:
+            if score>=12:
                 print('WIn')
                       
 
