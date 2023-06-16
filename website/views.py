@@ -81,14 +81,14 @@ def main_page(request):
 
                 context={'win': 'True',
                 'mark':mark,
-                'text': 'Вы приглашены на день рождения!!!'}
+                'text': 'Молодец, ты прошел тест, теперь ты приглашен на день Рождения Девятнадцатый день рождения Тимофея пройдет 22 октября в 19:00 а ресторане Dr. Живаго. Буду тебя ждать ❤️'}
                 response = render(request, 'main.html', context)
                 return response
             else:
                 print('LOSE')
                 context={'win': 'False',
                 'mark':mark,        
-                'text': 'Вы не друг'}
+                'text': 'К сожалению, ты не прошел тест. Но не расстраивайся, попробуй еще раз'}
                 response = render(request, 'main.html', context)
                 return response    
            # answer = Answer.objects.create(name=)
