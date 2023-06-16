@@ -61,7 +61,7 @@ def main_page(request):
             print('false')
         number+=1      
         if number==20:
-            mark = ''
+            mark = 'A100'
             if score>18:
                 mark='A'+str(score*5)
             elif score==17:
